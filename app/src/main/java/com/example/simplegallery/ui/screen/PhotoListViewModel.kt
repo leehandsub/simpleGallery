@@ -11,12 +11,8 @@ import com.example.simplegallery.network.RetrofitUtil
 import kotlinx.coroutines.launch
 
 class PhotoListViewModel : ViewModel() {
-    var photos: List<Photo>? by mutableStateOf(null)
+    var photos: List<Photo> by mutableStateOf(listOf())
         private set
-
-    init {
-        getPhotos()
-    }
 
     fun getPhotos() {
         viewModelScope.launch {
@@ -25,3 +21,4 @@ class PhotoListViewModel : ViewModel() {
     }
 
 }
+

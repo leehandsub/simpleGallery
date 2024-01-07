@@ -17,16 +17,14 @@ import com.example.simplegallery.model.Photo
 
 @Composable
 fun PhotoListScreen(viewModel: PhotoListViewModel) {
-    if (viewModel.photos != null) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-        ) {
-            items(viewModel.photos!!.size) { index ->
-                val item = viewModel.photos!![index]
-                PhotoItem(item)
-            }
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
+        items(viewModel.photos.size) { index ->
+            val item = viewModel.photos[index]
+            PhotoItem(item)
         }
     }
 }
@@ -38,7 +36,6 @@ fun PhotoItem(photo: Photo) {
             .fillMaxSize()
     )
     {
-
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(photo.downloadUrl)
@@ -46,7 +43,7 @@ fun PhotoItem(photo: Photo) {
                 .build(),
             contentDescription = photo.id,
             modifier = Modifier
-                .aspectRatio(1f / 1f)
+                .aspectRatio(1f)
                 .fillMaxSize(),
             contentScale = ContentScale.Crop,
         )
