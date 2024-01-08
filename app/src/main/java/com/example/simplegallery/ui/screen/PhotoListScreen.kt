@@ -16,14 +16,14 @@ import com.example.simplegallery.model.Photo
 
 
 @Composable
-fun PhotoListScreen(viewModel: PhotoListViewModel) {
+fun PhotoListScreen(photos: List<Photo>) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
     ) {
-        items(viewModel.photos.size) { index ->
-            val item = viewModel.photos[index]
+        items(photos.size) { index ->
+            val item = photos[index]
             PhotoItem(item)
         }
     }
@@ -43,7 +43,7 @@ fun PhotoItem(photo: Photo) {
                 .build(),
             contentDescription = photo.id,
             modifier = Modifier
-                .aspectRatio(1f)
+                .aspectRatio(1f)//그냥 1대1로 강제로 늘리는거인듯?
                 .fillMaxSize(),
             contentScale = ContentScale.Crop,
         )

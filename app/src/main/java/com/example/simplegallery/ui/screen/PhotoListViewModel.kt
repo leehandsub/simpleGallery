@@ -11,12 +11,16 @@ import com.example.simplegallery.network.RetrofitUtil
 import kotlinx.coroutines.launch
 
 class PhotoListViewModel : ViewModel() {
-    var photos: List<Photo> by mutableStateOf(listOf())
-        private set
+
+    val photos : List<Photo>
+        get() = _photos
+
+    private var _photos: List<Photo> by mutableStateOf(emptyList())
+
 
     fun getPhotos() {
         viewModelScope.launch {
-            photos = RetrofitUtil.api.getPhotos()
+            _photos = RetrofitUtil.api.getPhotos()
         }
     }
 
