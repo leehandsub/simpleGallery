@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitUtil {
-    const val SERVER_URL = "https://picsum.photos/"
+    private const val SERVER_URL = "https://picsum.photos/"
     val api: PhotoApi by lazy {
         createMealsApi()
     }
