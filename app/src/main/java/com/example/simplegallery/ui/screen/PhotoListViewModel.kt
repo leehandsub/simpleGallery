@@ -12,7 +12,7 @@ import com.example.simplegallery.network.RetrofitUtil
 import kotlinx.coroutines.launch
 
 class PhotoListViewModel : ViewModel() {
-    val photos : List<Photo>
+    val photos: List<Photo>
         get() = _photos
 
     private var _photos: List<Photo> by mutableStateOf(emptyList())
@@ -20,7 +20,15 @@ class PhotoListViewModel : ViewModel() {
     fun getPhotos() {
         viewModelScope.launch {
             _photos = RetrofitUtil.api.getPhotos()
-            Log.e("viewmodelSocpe",Thread.currentThread().name )
+            Log.e("viewmodelSocpe", Thread.currentThread().name)
+        }
+    }
+
+    fun getSearchAuthorPhoto(searchWord: String) {
+        if (searchWord == "") {
+            getPhotos()
+        } else {
+            _photos = _photos.filter { it.author.contains(searchWord) }
         }
     }
 }

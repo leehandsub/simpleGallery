@@ -36,8 +36,8 @@ import com.example.simplegallery.model.Photo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PhotoListScreen(photos: List<Photo>) {
-    var text by remember { mutableStateOf(TextFieldValue("")) }
+fun PhotoListScreen(photoListViewModel: PhotoListViewModel) {
+    var searchWord by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(
         modifier = Modifier
@@ -46,8 +46,11 @@ fun PhotoListScreen(photos: List<Photo>) {
             .fillMaxHeight()
     ) {
         OutlinedTextField(
-            value = text,
-            onValueChange = { newText -> text = newText },
+            value = searchWord,
+            onValueChange = { newText ->
+                searchWord = newText
+                photoListViewModel.getSearchAuthorPhoto(searchWord.text)
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 10.dp),
@@ -61,8 +64,8 @@ fun PhotoListScreen(photos: List<Photo>) {
                 .fillMaxHeight(),
             columns = GridCells.Fixed(2),
         ) {
-            items(photos.size) { index ->
-                val item = photos[index]
+            items(photoListViewModel.photos.size) { index ->
+                val item = photoListViewModel.photos[index]
                 PhotoItem(item)
             }
         }
