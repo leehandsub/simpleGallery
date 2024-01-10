@@ -1,5 +1,6 @@
 package com.example.simplegallery.ui.screen
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -19,6 +20,7 @@ class PhotoListViewModel : ViewModel() {
     fun getPhotos() {
         viewModelScope.launch {
             _photos = RetrofitUtil.api.getPhotos()
+            Log.e("viewmodelSocpe",Thread.currentThread().name )
         }
     }
 }
