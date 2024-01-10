@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">simpleGallery</string>
+    <string name="search">검색</string>
+    <string name="error_internet">인터넷 연결에 문제가 있습니다.</string>
 </resources>

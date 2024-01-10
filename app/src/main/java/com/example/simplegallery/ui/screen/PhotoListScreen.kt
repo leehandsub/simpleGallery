@@ -25,13 +25,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.example.simplegallery.R
 import com.example.simplegallery.model.Photo
+import com.example.simplegallery.ui.theme.Black20
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,7 +57,7 @@ fun PhotoListScreen(photoListViewModel: PhotoListViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 10.dp),
-            placeholder = { Text("검색") },
+            placeholder = { Text(stringResource(R.string.search)) },
             singleLine = true,
         )
         PhotoList(photoListViewModel)
@@ -65,7 +68,7 @@ fun PhotoListScreen(photoListViewModel: PhotoListViewModel) {
 fun PhotoList(photoListViewModel: PhotoListViewModel) { //viewmodel을 넘기는게 좋을까? isconnect랑 photolist를 넘기는게 좋을까?
     if (!photoListViewModel.isConnect) {
         Text(
-            text = "인터넷 연결에 문제가 있습니다.",
+            text = stringResource(R.string.error_internet),
             fontSize = 24.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxSize()
@@ -115,7 +118,7 @@ fun PhotoItem(photo: Photo) {
             fontSize = 12.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier
-                .background(Color(0x66000000))
+                .background(Black20)
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter),
         )
