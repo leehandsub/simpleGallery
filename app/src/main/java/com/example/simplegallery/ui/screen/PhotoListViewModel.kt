@@ -10,17 +10,26 @@ import com.example.simplegallery.model.Photo
 import com.example.simplegallery.network.RetrofitUtil
 
 import kotlinx.coroutines.launch
+import java.io.IOException
 
 class PhotoListViewModel : ViewModel() {
     val photos: List<Photo>
         get() = _photos
-
     private var _photos: List<Photo> by mutableStateOf(emptyList())
+
+    val isConnect: Boolean
+        get() = _isConnect
+    private var _isConnect: Boolean by mutableStateOf(false)
 
     fun getPhotos() {
         viewModelScope.launch {
-            _photos = RetrofitUtil.api.getPhotos()
-            Log.e("viewmodelSocpe", Thread.currentThread().name)
+            try {
+                _isConnect = true
+                _photos = RetrofitUtil.photoApi.getPhotos()
+                Log.e("viewmodelSocpe", Thread.currentThread().name)
+            } catch (e: IOException) {
+                _isConnect = false
+            }
         }
     }
 
