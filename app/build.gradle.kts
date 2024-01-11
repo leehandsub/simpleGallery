@@ -82,4 +82,7 @@ dependencies {
     //viewModel
     implementation(Libraries.AndroidX.LIFECYCLE_VIEWMODEL_KTX)
     implementation(Libraries.AndroidX.VIEWMODEL)
+
+    //navigation
+    implementation(Libraries.AndroidX.NAVIGATION)
 }
