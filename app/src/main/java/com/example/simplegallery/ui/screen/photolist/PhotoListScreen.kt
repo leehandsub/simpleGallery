@@ -1,6 +1,7 @@
 package com.example.simplegallery.ui.screen.photolist
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -30,6 +31,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.simplegallery.R
@@ -39,7 +41,7 @@ import com.example.simplegallery.ui.theme.Black20
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PhotoListScreen(photoListViewModel: PhotoListViewModel) {
+fun PhotoListScreen(photoListViewModel: PhotoListViewModel, navController: NavHostController) {
     var searchWord by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(
@@ -60,12 +62,12 @@ fun PhotoListScreen(photoListViewModel: PhotoListViewModel) {
             placeholder = { Text(stringResource(R.string.search)) },
             singleLine = true,
         )
-        DisplayPhotoContent(photoListViewModel)
+        DisplayPhotoContent(photoListViewModel, navController)
     }
 }
 
 @Composable
-fun DisplayPhotoContent(photoListViewModel: PhotoListViewModel) {
+fun DisplayPhotoContent(photoListViewModel: PhotoListViewModel, navController: NavHostController) {
     if (!photoListViewModel.isConnect) {
         Text(
             text = stringResource(R.string.error_internet),
@@ -74,12 +76,12 @@ fun DisplayPhotoContent(photoListViewModel: PhotoListViewModel) {
             modifier = Modifier.fillMaxSize()
         )
     } else {
-        PhotoGridView(photoListViewModel)
+        PhotoGridView(photoListViewModel, navController)
     }
 }
 
 @Composable
-fun PhotoGridView(photoListViewModel: PhotoListViewModel) {
+fun PhotoGridView(photoListViewModel: PhotoListViewModel, navController: NavHostController) {
     LazyVerticalGrid(
         modifier = Modifier
             .fillMaxWidth()
@@ -88,26 +90,35 @@ fun PhotoGridView(photoListViewModel: PhotoListViewModel) {
     ) {
         items(photoListViewModel.photos.size) { index ->
             val item = photoListViewModel.photos[index]
-            PhotoItem(item)
+            PhotoItem(item, navController)
         }
     }
 }
 
 @Composable
-fun PhotoItem(photo: Photo) {
+fun PhotoItem(photo: Photo, navController: NavHostController) {
     Box(
         modifier = Modifier
-            .padding(5.dp)//이거 위아래 위치 바뀌면 왜 개같이 나옴???
+            .padding(5.dp)
             .clip(
                 shape = RoundedCornerShape(
                     size = 16.dp,
                 ),
             )
             .fillMaxSize()
+            .clickable {
+                navController.currentBackStackEntry?.savedStateHandle?.set(
+                    key = "photo",
+                    value = photo
+                )
+                navController.navigate("detail")
+            }
     )
+
     {
         AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
+            model = ImageRequest
+                .Builder(LocalContext.current)
                 .data(photo.downloadUrl)
                 .crossfade(true)
                 .build(),
