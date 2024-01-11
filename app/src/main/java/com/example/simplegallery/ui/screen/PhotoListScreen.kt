@@ -60,12 +60,12 @@ fun PhotoListScreen(photoListViewModel: PhotoListViewModel) {
             placeholder = { Text(stringResource(R.string.search)) },
             singleLine = true,
         )
-        PhotoList(photoListViewModel)
+        DisplayPhotoContent(photoListViewModel)
     }
 }
 
 @Composable
-fun PhotoList(photoListViewModel: PhotoListViewModel) { //viewmodel을 넘기는게 좋을까? isconnect랑 photolist를 넘기는게 좋을까?
+fun DisplayPhotoContent(photoListViewModel: PhotoListViewModel) {
     if (!photoListViewModel.isConnect) {
         Text(
             text = stringResource(R.string.error_internet),
@@ -74,16 +74,21 @@ fun PhotoList(photoListViewModel: PhotoListViewModel) { //viewmodel을 넘기는
             modifier = Modifier.fillMaxSize()
         )
     } else {
-        LazyVerticalGrid(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
-            columns = GridCells.Fixed(2),
-        ) {
-            items(photoListViewModel.photos.size) { index ->
-                val item = photoListViewModel.photos[index]
-                PhotoItem(item)
-            }
+        PhotoGridView(photoListViewModel)
+    }
+}
+
+@Composable
+fun PhotoGridView(photoListViewModel: PhotoListViewModel) {
+    LazyVerticalGrid(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        columns = GridCells.Fixed(2),
+    ) {
+        items(photoListViewModel.photos.size) { index ->
+            val item = photoListViewModel.photos[index]
+            PhotoItem(item)
         }
     }
 }

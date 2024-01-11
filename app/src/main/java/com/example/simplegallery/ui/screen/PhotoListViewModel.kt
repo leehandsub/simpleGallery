@@ -34,7 +34,7 @@ class PhotoListViewModel : ViewModel() {
     }
 
     fun getSearchAuthorPhoto(searchWord: String) {
-        if (searchWord == "") {
+        if (searchWord.isBlank()) {
             getPhotos()
         } else {
             _photos = _photos.filter { it.author.contains(searchWord) }

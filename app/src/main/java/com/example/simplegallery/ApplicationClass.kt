@@ -9,25 +9,23 @@ import java.util.concurrent.TimeUnit
 
 class ApplicationClass : Application() {
     companion object {
-        lateinit var retrofit: Retrofit
         private const val SERVER_URL = "https://picsum.photos/"
-    }
 
-    override fun onCreate() {
-        super.onCreate()
-        val loggingInterceptor =
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val okHttpClient = OkHttpClient.Builder()
-            .readTimeout(5000, TimeUnit.MILLISECONDS)
-            .writeTimeout(5000, TimeUnit.MILLISECONDS)
-            .connectTimeout(5000, TimeUnit.MILLISECONDS)
-            .addInterceptor(loggingInterceptor)
-            .build()
+        val retrofit: Retrofit by lazy {
+            val loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+            val okHttpClient = OkHttpClient.Builder()
+                .readTimeout(5000, TimeUnit.MILLISECONDS)
+                .writeTimeout(5000, TimeUnit.MILLISECONDS)
+                .connectTimeout(5000, TimeUnit.MILLISECONDS)
+                .addInterceptor(loggingInterceptor)
+                .build()
 
-        retrofit = Retrofit.Builder()
-            .baseUrl(SERVER_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
+            Retrofit.Builder()
+                .baseUrl(SERVER_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build()
+        }
     }
 }
