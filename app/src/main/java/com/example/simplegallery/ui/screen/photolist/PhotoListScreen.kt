@@ -1,4 +1,4 @@
-package com.example.simplegallery.ui.screen
+package com.example.simplegallery.ui.screen.photolist
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

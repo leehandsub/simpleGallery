@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.simplegallery.ui.screen.PhotoListScreen
-import com.example.simplegallery.ui.screen.PhotoListViewModel
+import com.example.simplegallery.ui.screen.photolist.PhotoListScreen
+import com.example.simplegallery.ui.screen.photolist.PhotoListViewModel
 import com.example.simplegallery.ui.theme.SimpleGalleryTheme
 
 class MainActivity : ComponentActivity() {

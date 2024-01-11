@@ -1,4 +1,4 @@
-package com.example.simplegallery.ui.screen
+package com.example.simplegallery.ui.screen.photolist
 
 import android.util.Log
 import androidx.compose.runtime.getValue
