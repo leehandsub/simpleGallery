@@ -44,8 +44,8 @@ class MainActivity : ComponentActivity() {
 fun Navigation(photoListViewModel: PhotoListViewModel) {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "screen1") {
-        composable("screen1") {
+    NavHost(navController = navController, startDestination = "photoList") {
+        composable("photoList") {
             PhotoListScreen(photoListViewModel, navController)
         }
         composable(
