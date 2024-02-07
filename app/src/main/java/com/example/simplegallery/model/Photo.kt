@@ -1,10 +1,8 @@
 package com.example.simplegallery.model
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
-@Parcelize
 data class Photo(
     @SerializedName("author")
     val author: String,
@@ -23,4 +21,4 @@ data class Photo(
 
     @SerializedName("width")
     val width: Int,
-) : Parcelable
+) : Serializable
