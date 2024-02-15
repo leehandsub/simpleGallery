@@ -12,8 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.simplegallery.model.Photo
-import com.example.simplegallery.repository.PhotoListRemoteDataSource
-import com.example.simplegallery.repository.PhotoListRepository
+import com.example.simplegallery.ui.common.AppContainer
 import com.example.simplegallery.ui.screen.photodetail.PhotoDetailScreen
 import com.example.simplegallery.ui.screen.photolist.PhotoListScreen
 import com.example.simplegallery.ui.screen.photolist.PhotoListViewModel
@@ -26,9 +25,7 @@ class MainActivity : ComponentActivity() {
 
         //val photoListViewModel: PhotoListViewModel by viewModels()
 
-        val photoListRemoteDataSource = PhotoListRemoteDataSource()
-        val photoListRepository = PhotoListRepository(photoListRemoteDataSource)
-        photoListViewModel = PhotoListViewModel(photoListRepository)
+        photoListViewModel = AppContainer.photoListViewModelFactory.create()
 
         photoListViewModel.getPhotos()
 
