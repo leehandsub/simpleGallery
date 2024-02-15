@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -81,4 +82,7 @@ dependencies {
     //viewModel
     implementation(Libraries.AndroidX.LIFECYCLE_VIEWMODEL_KTX)
     implementation(Libraries.AndroidX.VIEWMODEL)
+
+    //navigation
+    implementation(Libraries.AndroidX.NAVIGATION)
 }

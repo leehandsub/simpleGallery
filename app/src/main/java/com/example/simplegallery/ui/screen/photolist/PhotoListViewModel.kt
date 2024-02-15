@@ -1,4 +1,4 @@
-package com.example.simplegallery.ui.screen
+package com.example.simplegallery.ui.screen.photolist
 
 import android.util.Log
 import androidx.compose.runtime.getValue
@@ -7,7 +7,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.simplegallery.model.Photo
-import com.example.simplegallery.network.RetrofitUtil
+import com.example.simplegallery.network.photoApi
 
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -25,7 +25,7 @@ class PhotoListViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _isConnect = true
-                _photos = RetrofitUtil.photoApi.getPhotos()
+                _photos = photoApi.getPhotos()
                 Log.e("viewmodelSocpe", Thread.currentThread().name)
             } catch (e: IOException) {
                 _isConnect = false
@@ -34,7 +34,7 @@ class PhotoListViewModel : ViewModel() {
     }
 
     fun getSearchAuthorPhoto(searchWord: String) {
-        if (searchWord == "") {
+        if (searchWord.isBlank()) {
             getPhotos()
         } else {
             _photos = _photos.filter { it.author.contains(searchWord) }

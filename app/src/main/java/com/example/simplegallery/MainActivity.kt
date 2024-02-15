@@ -7,9 +7,16 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.simplegallery.ui.screen.PhotoListScreen
-import com.example.simplegallery.ui.screen.PhotoListViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.simplegallery.model.Photo
+import com.example.simplegallery.ui.screen.photodetail.PhotoDetailScreen
+import com.example.simplegallery.ui.screen.photolist.PhotoListScreen
+import com.example.simplegallery.ui.screen.photolist.PhotoListViewModel
 import com.example.simplegallery.ui.theme.SimpleGalleryTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,8 +33,27 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PhotoListScreen(photoListViewModel)
+                    Navigation(photoListViewModel)
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun Navigation(photoListViewModel: PhotoListViewModel) {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "photoList") {
+        composable("photoList") {
+            PhotoListScreen(photoListViewModel, navController)
+        }
+        composable(
+            route = "detail",
+        ) {
+            val result = navController.previousBackStackEntry?.savedStateHandle?.get<Photo>("photo")
+            if (result != null) {
+                PhotoDetailScreen(result)
             }
         }
     }

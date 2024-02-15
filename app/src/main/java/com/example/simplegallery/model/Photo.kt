@@ -1,7 +1,7 @@
 package com.example.simplegallery.model
 
 import com.google.gson.annotations.SerializedName
-
+import java.io.Serializable
 
 data class Photo(
     @SerializedName("author")
@@ -21,4 +21,4 @@ data class Photo(
 
     @SerializedName("width")
     val width: Int,
-)
+) : Serializable

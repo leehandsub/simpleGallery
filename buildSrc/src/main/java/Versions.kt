@@ -22,6 +22,7 @@ object Libraries {
             "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.LIFECYCLE_VERSION}"
         const val COMPOSE = "androidx.activity:activity-compose:${Versions.COMPOSE_VERSION}"
         const val VIEWMODEL = "androidx.activity:activity-ktx:1.8.2"
+        const val NAVIGATION = "androidx.navigation:navigation-compose:2.6.0"
     }
 
 
