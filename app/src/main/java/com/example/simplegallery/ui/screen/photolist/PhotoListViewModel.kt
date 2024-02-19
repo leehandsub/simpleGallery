@@ -7,12 +7,11 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.simplegallery.model.Photo
-import com.example.simplegallery.network.photoApi
-
+import com.example.simplegallery.repository.PhotoListRepository
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class PhotoListViewModel : ViewModel() {
+class PhotoListViewModel(private val photoListRepository: PhotoListRepository) : ViewModel() {
     val photos: List<Photo>
         get() = _photos
     private var _photos: List<Photo> by mutableStateOf(emptyList())
@@ -25,7 +24,7 @@ class PhotoListViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _isConnect = true
-                _photos = photoApi.getPhotos()
+                _photos = photoListRepository.getPhotos()
                 Log.e("viewmodelSocpe", Thread.currentThread().name)
             } catch (e: IOException) {
                 _isConnect = false
