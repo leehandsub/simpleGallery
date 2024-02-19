@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.simplegallery.model.Photo
 import com.example.simplegallery.ui.common.AppContainer
+import com.example.simplegallery.ui.common.PhotoListContainer
 import com.example.simplegallery.ui.screen.photodetail.PhotoDetailScreen
 import com.example.simplegallery.ui.screen.photolist.PhotoListScreen
 import com.example.simplegallery.ui.screen.photolist.PhotoListViewModel
@@ -20,12 +21,16 @@ import com.example.simplegallery.ui.theme.SimpleGalleryTheme
 
 class MainActivity : ComponentActivity() {
     private lateinit var photoListViewModel: PhotoListViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //val photoListViewModel: PhotoListViewModel by viewModels()
 
-        photoListViewModel = AppContainer.photoListViewModelFactory.create()
+        AppContainer.photoListContainer = PhotoListContainer(AppContainer.photoListRepository)
+        AppContainer.photoListContainer?.let { container ->
+            photoListViewModel = container.photoListViewModelFactory.create()
+        }
 
         photoListViewModel.getPhotos()
 
@@ -40,6 +45,11 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        AppContainer.photoListContainer = null
     }
 }
 
