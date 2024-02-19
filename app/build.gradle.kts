@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -85,4 +86,8 @@ dependencies {
 
     //navigation
     implementation(Libraries.AndroidX.NAVIGATION)
+
+    //dager
+    implementation(Libraries.DAGGER.DAGGER)
+    kapt(Libraries.DAGGER.DAGGER_COMPILER)
 }
