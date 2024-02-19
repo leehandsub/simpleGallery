@@ -6,7 +6,11 @@ import com.example.simplegallery.ui.screen.photolist.PhotoListViewModel
 
 object AppContainer {
     private val photoListRemoteDataSource = PhotoListRemoteDataSource()
-    private val photoListRepository = PhotoListRepository(photoListRemoteDataSource)
+    val photoListRepository = PhotoListRepository(photoListRemoteDataSource)
+    var photoListContainer: PhotoListContainer? = null
+}
+
+class PhotoListContainer(private val photoListRepository: PhotoListRepository) {
     val photoListViewModelFactory = PhotoListViewModelFactory(photoListRepository)
 }
 
