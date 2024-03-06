@@ -8,10 +8,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.simplegallery.model.Photo
 import com.example.simplegallery.repository.PhotoListRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
+import javax.inject.Inject
 
-class PhotoListViewModel(private val photoListRepository: PhotoListRepository) : ViewModel() {
+@HiltViewModel
+class PhotoListViewModel @Inject constructor(private val photoListRepository: PhotoListRepository) :
+    ViewModel() {
     val photos: List<Photo>
         get() = _photos
     private var _photos: List<Photo> by mutableStateOf(emptyList())
