@@ -10,6 +10,8 @@ object Versions {
 
     // KTX
     const val CORE_VERSION = "1.7.0"
+
+    const val HILT_VERSION = "2.44"
 }
 
 object Libraries {
@@ -47,4 +49,10 @@ object Libraries {
     object COIL {
         const val COIL_COMPOSE = "io.coil-kt:coil-compose:${Versions.COIL_VERSION}"
     }
+
+    object HILT {
+        const val HILT = "com.google.dagger:hilt-android:${Versions.HILT_VERSION}"
+        const val HILT_COMPILER = "com.google.dagger:hilt-android-compiler:${Versions.HILT_VERSION}"
+    }
+
 }

@@ -3,6 +3,7 @@ package com.example.simplegallery
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -12,25 +13,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.simplegallery.model.Photo
-import com.example.simplegallery.ui.common.AppContainer
-import com.example.simplegallery.ui.common.PhotoListContainer
 import com.example.simplegallery.ui.screen.photodetail.PhotoDetailScreen
 import com.example.simplegallery.ui.screen.photolist.PhotoListScreen
 import com.example.simplegallery.ui.screen.photolist.PhotoListViewModel
 import com.example.simplegallery.ui.theme.SimpleGalleryTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private lateinit var photoListViewModel: PhotoListViewModel
-
+    private val photoListViewModel: PhotoListViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //val photoListViewModel: PhotoListViewModel by viewModels()
-
-        AppContainer.photoListContainer = PhotoListContainer(AppContainer.photoListRepository)
-        AppContainer.photoListContainer?.let { container ->
-            photoListViewModel = container.photoListViewModelFactory.create()
-        }
 
         photoListViewModel.getPhotos()
 
@@ -45,11 +38,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        AppContainer.photoListContainer = null
     }
 }
 
