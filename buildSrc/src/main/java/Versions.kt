@@ -10,6 +10,8 @@ object Versions {
 
     // KTX
     const val CORE_VERSION = "1.7.0"
+
+    const val DAGGER_VERSION = "2.50"
 }
 
 object Libraries {
@@ -46,5 +48,10 @@ object Libraries {
 
     object COIL {
         const val COIL_COMPOSE = "io.coil-kt:coil-compose:${Versions.COIL_VERSION}"
+    }
+
+    object DAGGER {
+        const val DAGGER = "com.google.dagger:dagger:${Versions.DAGGER_VERSION}"
+        const val DAGGER_COMPILER = "com.google.dagger:dagger-compiler:${Versions.DAGGER_VERSION}"
     }
 }

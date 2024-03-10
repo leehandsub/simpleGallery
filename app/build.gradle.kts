@@ -2,14 +2,15 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.example.simplegallery"
+    namespace = "com.leehandsub.simplegallery"
     compileSdk = AppConfig.COMPILE_SDK_VERSION
 
     defaultConfig {
-        applicationId = "com.example.simplegallery"
+        applicationId = "com.leehandsub.simplegallery"
         minSdk = AppConfig.MIN_SDK_VERSION
         targetSdk = AppConfig.TARGET_SDK_VERSION
         versionCode = AppConfig.APP_VERSION_CODE
@@ -31,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -85,4 +86,8 @@ dependencies {
 
     //navigation
     implementation(Libraries.AndroidX.NAVIGATION)
+
+    //dager
+    implementation(Libraries.DAGGER.DAGGER)
+    kapt(Libraries.DAGGER.DAGGER_COMPILER)
 }
